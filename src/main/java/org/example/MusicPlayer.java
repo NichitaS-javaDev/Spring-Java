@@ -1,50 +1,32 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import java.util.Random;
 
+@Component
 public class MusicPlayer {
-    Music music;
-    String name;
-    int volume;
+    @Autowired
+    Music classicalMusic, rapMusic, rockMusic;
 
-    List<Music> playList = new ArrayList<Music> ();
-
-    public void doMyInit(){
-        System.out.println("Initialization");
+    @Autowired
+    public MusicPlayer(Music classicalMusic, Music rapMusic, Music rockMusic) {
+        this.classicalMusic = classicalMusic;
+        this.rapMusic = rapMusic;
+        this.rockMusic = rockMusic;
     }
 
-    public void doMyDestroy(){
-        System.out.println("Destroying");
-    }
-
-    public void setPlayList(List<Music> playList) {
-        this.playList = playList;
-    }
-
-    public void setMusic(Music music){
-        this.music = music;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public void playMusic(){
-        for (Music l: playList) {
-            System.out.println(l.getSong());
+    public void playMusic(MusicGenre genre){
+        if(genre == MusicGenre.Classical) {
+            System.out.println("Now is playing : " + classicalMusic.getSong().get(new Random().nextInt(3)));
+        }
+        if (genre == MusicGenre.Rap){
+            System.out.println("Now is playing : " + rapMusic.getSong().get(new Random().nextInt(3)));
+        }
+        if (genre == MusicGenre.Rock){
+            System.out.println("Now is playing : " + rockMusic.getSong().get(new Random().nextInt(3)));
         }
     }
 }
+
+

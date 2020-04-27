@@ -1,6 +1,5 @@
 package org.example;
 
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestSpring {
@@ -10,14 +9,9 @@ public class TestSpring {
                 "applicationContext.xml"
         );
 
-        //Music music = context.getBean("musicBean", Music.class);
-        //MusicPlayer player = new MusicPlayer(music);
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
+        musicPlayer.playMusic(MusicGenre.Classical);
 
-        MusicPlayer player = context.getBean("musicPlayer", MusicPlayer.class);
-
-        player.playMusic();
-        System.out.println(player.getName());
-        System.out.println(player.getVolume());
     }
 }
